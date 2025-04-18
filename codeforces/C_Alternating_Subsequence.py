@@ -5,38 +5,19 @@ for _ in range(t):
     arr = list(map(int, input().split()))
 
     def alternating(arr,n):
-        i = 0
-        j = 1
+        current = arr[0]
         result = 0
 
-        while j+1 < n:
-            if arr[i] > 0 and arr[j] > 0 and arr[i] <= arr[j]:
-                i = j
-                j += 1
-            if arr[i] < 0 and arr[j] > 0 and arr[j+1] > 0 and arr[j] <= arr[j+1]:
-                i = j
-                j += 1
-            elif arr[i] < 0 and arr[j] > 0 and arr[j+1] < 0:
-                result += arr[j]
-                print('1:',arr[j])
-                i = j
-                j += 1
-            elif arr[i] > 0 and arr[j] < 0 and arr[j+1] < 0 and arr[j] <= arr[j+1]:
-                i = j
-                j += 1
-            elif arr[i] > 0 and arr[j] < 0 and arr[j+1] > 0:
-                result += arr[j]
-                print('2:',arr[j])
-                i = j
-                j += 1
-            elif arr[i] > 0 and arr[j] < 0 and arr[j+1] > 0:
-                result += arr[j]
-                print('3:',arr[j])
-                i = j
-                j += 1
+        for i in range(1,n):
+            if (current > 0 and arr[i] > 0) or (current < 0 and arr[i] < 0):
+                current = max(current, arr[i])
             else:
-                i = j
-                j += 1
+                result += current
+                current = arr[i]
+        
+        result += current
+
         return result
     
     print(alternating(arr,n))
+
