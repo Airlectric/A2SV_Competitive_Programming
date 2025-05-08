@@ -2,7 +2,7 @@ class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
         values = []
         n = len(position)
-        stack = []
+        unique_fleet = []
 
         for i in range(n):
             time = (target - position[i])/ speed[i]
@@ -12,9 +12,9 @@ class Solution:
 
         for i in range(n-1,-1,-1):
 
-            if not stack or values[i][1] > stack[-1]:
-                stack.append(values[i][1])
+            if not unique_fleet or values[i][1] > unique_fleet[-1]:
+                unique_fleet.append(values[i][1])
         
-        return len(stack)
+        return len(unique_fleet)
 
         
